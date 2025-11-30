@@ -1,43 +1,41 @@
-# Git Repository Migration Tool
+# Git Repository Migration & Restoration Tool
 
-A lightweight Node.js utility designed to migrate multiple Git repositories from one machine to another while **preserving the exact folder structure**.
+A comprehensive Node.js utility designed to migrate multiple Git repositories from one machine to another while **preserving the exact folder structure**.
 
-This tool is perfect for developers moving to a new laptop who have dozens of repositories organized in nested directories (e.g., Microservices, Frontends, Shared Libraries) and don't want to clone them manually one by one.
+It includes a **Smart Checkout** feature that can automatically switch repositories to your development branches (`dev` or `dev_branch`) immediately after cloning.
 
 ## Features
-*   **Zero Dependencies:** Uses standard Node.js libraries (`fs`, `path`, `child_process`). No `npm install` required.
-*   **Smart Scanning:** Recursively finds Git repositories by detecting hidden `.git` folders.
-*   **Structure Preservation:** Remembers exactly where a repo was nested (e.g., `src/backend/api/service-a`) and recreates that folder on the new machine.
-*   **Performance:** Skips `node_modules` during scanning to ensure speed.
-*   **Secure Authentication:** Relies on your system's **Git Credential Manager** (GCM). No passwords or tokens are stored in the script.
+*   **Structure Preservation:** Mirrors your exact folder hierarchy (e.g., `src/backend/microservices/auth`).
+*   **Smart Branch Checkout:** Optionally attempts to check out `dev` or `dev_branch` automatically.
+*   **Deep Scanning:** Recursively finds Git repositories, even in hidden folders.
+*   **Secure Authentication:** Uses your system's **Git Credential Manager** (no hardcoded passwords).
+*   **Zero Dependencies:** Runs on standard Node.js without `npm install`.
 
 ---
 
 ## Prerequisites
 
-Before running the script, ensure you have the following installed:
-
 1.  **Node.js**: (Version 12+ recommended). [Download here](https://nodejs.org/).
-2.  **Git**: Ensure `git` is available in your command line.
-3.  **Git Credential Manager**: Usually installed with Git for Windows or Mac. This handles your Azure DevOps/GitHub login automatically.
+2.  **Git**: Ensure `git` is installed and available in your terminal.
+3.  **Git Credential Manager**: (Recommended) Installed with Git for Windows/Mac to handle Azure DevOps/GitHub logins automatically.
 
 ---
 
 ## Usage Guide
 
-Save the script logic into a file named `git-migration-tool.js`.
+Save the script code into a file named **`git-migration-tool.js`**.
 
 ### Step 1: Export (On the Old Laptop)
-This step scans your existing workspace and creates a "snapshot" file.
+*This scans your workspace and creates a map of your repositories.*
 
-1.  Open a terminal.
-2.  Run the script:
+1.  Open a terminal in the folder where you saved the script.
+2.  Run:
     ```bash
     node git-migration-tool.js
     ```
 3.  Select **Option 1 (IMPORT)**.
-4.  Paste the **Absolute Path** of your root workspace (e.g., `C:\Users\John\Source\Repos`).
-5.  The script will generate a file named **`git-repos-snapshot.json`** in the same folder.
+4.  Paste the **Absolute Path** of your source directory (e.g., `C:\Users\John\Source\Repos`).
+5.  The tool creates a file named **`git-repos-snapshot.json`**.
 
 ### Step 2: Transfer
 Copy the following two files to your **New Laptop**:
@@ -45,52 +43,49 @@ Copy the following two files to your **New Laptop**:
 2.  `git-repos-snapshot.json`
 
 ### Step 3: Restore (On the New Laptop)
-This step reads the snapshot and clones the repositories.
+*This reads the snapshot, clones repos, and sets up branches.*
 
 1.  Open a terminal on the new machine.
-2.  Run the script:
+2.  Run:
     ```bash
     node git-migration-tool.js
     ```
 3.  Select **Option 2 (RESTORE)**.
-4.  Paste the **Absolute Path** where you want the repositories to live (e.g., `D:\Work\Source`).
-5.  The script will:
-    *   Read the JSON snapshot.
-    *   Recreate the folder hierarchy (e.g., `D:\Work\Source\Backend\Microservices`).
-    *   Clone the specific git repositories into their correct folders.
+4.  Paste the **Absolute Path** where you want the repositories to go (e.g., `D:\Work\Source`).
+5.  **Branch Strategy Prompt:** The tool will ask:
+    > *Do you want to attempt this checkout strategy? (y/n)*
+    
+    *   **Type `y` (Yes):** The tool will clone the repo and immediately try to switch branches (see logic below).
+    *   **Type `n` (No):** The tool will just clone the repositories and leave them on the default branch (usually `main` or `master`).
 
 ---
 
-## Authentication & Security
+## Smart Branch Logic
 
-**Does this script ask for my password?**
-No.
+If you select **Yes** during the Restore phase, the tool follows this priority order for **every single repository**:
 
-**How does it authenticate?**
-The script executes standard `git clone` commands. It relies on your operating system's Git configuration.
-*   If you are already logged in via Git on the command line, it clones silently.
-*   If you are not logged in, the standard **Git Credential Manager popup** (Azure DevOps/GitHub login window) will appear for the first repository. Once you log in, subsequent clones will proceed automatically.
+1.  **Priority 1:** Check if a remote branch named **`origin/dev`** exists.
+    *   *If found:* Run `git checkout dev`.
+2.  **Priority 2:** If `dev` is missing, check for **`origin/dev_branch`**.
+    *   *If found:* Run `git checkout dev_branch`.
+3.  **Fallback:** If neither exists, stay on the **default branch** (e.g., `main` or `master`).
+
+*This allows you to immediately start working on the development version of your code without manually switching branches for dozens of repositories.*
 
 ---
 
-## The Snapshot File (`git-repos-snapshot.json`)
-The generated JSON file contains a simple map of your repositories. It looks like this:
+## Authentication
 
-```json
-[
-  {
-    "relativePath": "Backend\\Microservices\\QSIXL-Auth",
-    "remoteUrl": "https://dev.azure.com/org/project/_git/QSIXL-Auth"
-  },
-  {
-    "relativePath": "Frontend\\Web\\QSIXL-UI",
-    "remoteUrl": "https://dev.azure.com/org/project/_git/QSIXL-UI"
-  }
-]
-```
+**How do I log in?**
+The script executes standard `git clone` commands.
+1.  When the script tries to clone the first private repository, your operating system will open the standard **Git Login Popup**.
+2.  Log in once.
+3.  Git Credential Manager stores your token, and the remaining repositories will clone automatically without asking again.
+
+---
 
 ## Troubleshooting
 
-*   **"Directory not empty" error:** The script tries to be safe. If a target folder already exists and is empty, the script deletes it to allow `git clone` to work. If the folder contains files but no `.git` folder, the script may skip it to avoid overwriting work.
-*   **Path issues:** You can paste paths with or without quotes (e.g., `"C:\My Path"` or `C:\My Path`). The script handles both.
-*   **Hidden Folders:** The script automatically detects repositories inside hidden folders, but it will ignore system protected folders (like `System Volume Info`) to prevent crashing.
+*   **"Directory not empty"**: If a target folder exists and is empty, the script will delete it to allow cloning. If it contains files, the script skips it to prevent data loss.
+*   **Branch Switching Failed**: If the script cannot switch to `dev`, it simply logs a message and moves to the next repo. It will not stop the entire process.
+*   **Path Errors**: You can paste paths with or without quotes. The script automatically cleans them up.
