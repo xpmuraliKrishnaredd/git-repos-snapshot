@@ -1,0 +1,98 @@
+[
+  {
+    "relativePath": "EventCatalogProtoBufGenerator",
+    "remoteUrl": "https://inovalondev.visualstudio.com/Transactional%20Analytics/_git/EventCatalogProtoBufGenerator"
+  },
+  {
+    "relativePath": "Mongo.PatientProfile.Util",
+    "remoteUrl": "https://inovalondev.visualstudio.com/Transactional%20Analytics/_git/Mongo.PatientProfile.Util"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL%20-%20Database%20Scripts",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL%20-%20Database%20Scripts"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-AWSLamda",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-AWSLamda"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-CloudServices",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-CloudServices"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-ContentManagement",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-ContentManagement"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-CronJobExecutor",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-CronJobExecutor"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-DatabaseDeployApi",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-DatabaseDeployApi"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-DataExtraction",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-DataExtraction"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-IAM",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-IAM"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-JobExecutor",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-JobExecutor"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-JobsRunner",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-JobsRunner"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-KubeJobs",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-KubeJobs"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-OrchestrationJsonManager",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-OrchestrationJsonManager"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-OrchestrationTasks",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-OrchestrationTasks"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-Reporting",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-Reporting"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-Router",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-Router"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-Shared",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-Shared"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-SignalR",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-SignalR"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-Web",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-Web"
+  },
+  {
+    "relativePath": "QSI-XL\\QSIXL-WebApi",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/QSIXL-WebApi"
+  },
+  {
+    "relativePath": "S3_PatientProfile",
+    "remoteUrl": "https://inovalondev.visualstudio.com/QSI-XL/_git/S3.PatientProfile"
+  },
+  {
+    "relativePath": "T-Analytics",
+    "remoteUrl": "https://inovalondev.visualstudio.com/Transactional%20Analytics/_git/TransactionalAnalytics"
+  },
+  {
+    "relativePath": "T-Analytics-Copy",
+    "remoteUrl": "https://inovalondev.visualstudio.com/Transactional%20Analytics/_git/TransactionalAnalytics"
+  }
+]
